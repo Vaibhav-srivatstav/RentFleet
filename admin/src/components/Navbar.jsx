@@ -13,7 +13,7 @@ const navLinks = [
 ];
 
 
-const NavBar = () => {
+const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const menuRef = useRef(null);
@@ -106,4 +106,4 @@ const NavBar = () => {
     )
 }
 
-export default NavBar
+export default Navbar
