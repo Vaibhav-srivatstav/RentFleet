@@ -22,7 +22,7 @@ import axios from "axios";
 import carsData from "../assets/vehicleData";
 import { carDetailStyles } from "../assets/dummyStyle";
 
-const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_BASE = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/$/,"");
 const api = axios.create({
   baseURL: API_BASE,
   headers: { Accept: "application/json" },

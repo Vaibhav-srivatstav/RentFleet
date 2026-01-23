@@ -31,7 +31,7 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
+            const base = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/$/,"");
             const url = `${base}/api/auth/login`
 
             const res = await axios.post(url, credentials,{
