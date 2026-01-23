@@ -27,7 +27,8 @@ connectDB();
 //MIDLEFRAMWORK
 app.use(cors({
     origin:[
-        "https://rent-fleet.vercel.app"
+        "https://rent-fleet.vercel.app",
+        "https://rentfleet-admin.vercel.app"
     ],
     credentials: true
 }));
