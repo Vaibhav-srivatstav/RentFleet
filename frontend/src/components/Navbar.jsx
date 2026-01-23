@@ -28,7 +28,7 @@ const Navbar = () => {
   const buttonRef = useRef(null);
   const abortRef = useRef(null);
 
-  const base = "https://rentfleet-backend.onrender.com";
+  const base = import.meta.env.VITE_API_URL || "http://localhost:5000";
   const api = axios.create({
     baseURL: base,
     headers: { Accept: "application/json" },

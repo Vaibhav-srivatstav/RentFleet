@@ -7,7 +7,7 @@ import { FaCar, FaCalendarAlt, FaMapMarkerAlt,  FaFilter,  FaTimes,  FaCheckCirc
 } from "react-icons/fa";
 import { myBookingsStyles as s } from "../assets/dummyStyle";
 
-const API_BASE = "https://rentfleet-backend.onrender.com";
+const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
 const TIMEOUT = 15000;
 
 // ---------- Helpers ----------

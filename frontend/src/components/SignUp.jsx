@@ -40,7 +40,7 @@ const SignUp = () => {
         }
         setLoading(true);
         try {
-            const base = 'https://rentfleet-backend.onrender.com';
+            const base = 'import.meta.env.VITE_API_URL || "http://localhost:5000"';
             const url = `${base}/api/auth/register`
 
             const res = await axios.post(url, formData,{

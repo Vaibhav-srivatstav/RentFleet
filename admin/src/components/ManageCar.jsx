@@ -6,7 +6,7 @@ import { toast, ToastContainer } from 'react-toastify';
 
 import { FaCar, FaCog, FaEdit, FaFilter, FaGasPump, FaTachometerAlt, FaTrash, FaUser , FaTimes} from "react-icons/fa";
 
-const BASE = 'https://rentfleet-backend.onrender.com';
+const BASE = 'import.meta.env.VITE_API_URL || "http://localhost:5000"';
 const api = axios.create({ baseURL: BASE, headers: { Accept: 'application/json' } });
 
 

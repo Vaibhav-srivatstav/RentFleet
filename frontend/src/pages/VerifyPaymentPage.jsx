@@ -30,7 +30,7 @@ const VerifyPaymentPage = () => {
       try {
         setStatusMsg('Confirming payment with server')
 
-        const API_BASE = 'https://rentfleet-backend.onrender.com';
+        const API_BASE = import.meta.env.VITE_API_URL || "http://localhost:5000";
         const res = await axios.get(`${API_BASE}/api/payments/confirm`,{
         params: {session_id},
         headers:token?{Authorization:`Bearer ${token}`}:{},
