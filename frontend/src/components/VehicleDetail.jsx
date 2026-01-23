@@ -22,7 +22,7 @@ import axios from "axios";
 import carsData from "../assets/vehicleData";
 import { carDetailStyles } from "../assets/dummyStyle";
 
-const API_BASE = "http://localhost:5000";
+const API_BASE = "https://rentfleet-backend.onrender.com/";
 const api = axios.create({
   baseURL: API_BASE,
   headers: { Accept: "application/json" },

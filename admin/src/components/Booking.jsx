@@ -3,7 +3,7 @@ import { BookingPageStyles, statusConfig } from '../assets/dummyStyles'
 import axios from 'axios'
 import { FaCalendarAlt, FaCar, FaCheckCircle, FaChevronDown, FaCity, FaCreditCard, FaEdit, FaEnvelope, FaGasPump, FaGlobeAsia, FaMapMarkerAlt, FaMapPin, FaPhone, FaSearch, FaSync, FaTachometerAlt, FaUser, FaUserFriends, FaFilter } from 'react-icons/fa';
 
-const baseURL = "http://localhost:5000";
+const baseURL = "https://rentfleet-backend.onrender.com/";
 const api = axios.create({ baseURL, headers: { Accept: 'application/json' } });
 
 const formatDate = (s) => {

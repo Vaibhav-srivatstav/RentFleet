@@ -3,8 +3,6 @@ import path from 'path';
 import fs from 'fs';
 
 
-
-
 export const createCar = async (req, res, next) => {
     try {
         const {

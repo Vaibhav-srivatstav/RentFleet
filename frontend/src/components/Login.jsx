@@ -31,7 +31,7 @@ const Login = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            const base = 'http://localhost:5000';
+            const base = 'https://rentfleet-backend.onrender.com/';
             const url = `${base}/api/auth/login`
 
             const res = await axios.post(url, credentials,{
