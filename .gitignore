@@ -1,0 +1,21 @@
+# Node deps anywhere
+**/node_modules/
+
+# Env anywhere
+**/.env
+**/.env.*
+
+# Build outputs anywhere
+**/dist/
+**/build/
+**/.next/
+**/out/
+
+# Logs anywhere
+**/*.log
+
+# Editor/OS
+**/.DS_Store
+**/Thumbs.db
+**/.vscode/
+**/.idea/
