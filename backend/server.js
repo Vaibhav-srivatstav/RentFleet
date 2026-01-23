@@ -13,7 +13,7 @@ import bookingRouter from './routes/bookingRoutes.js'
 import paymentRouter from './routes/paymentRouter.js';
 
 const app = express();
-const PORT = 5000;
+const Port = process.env.PORT;
 dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
@@ -57,6 +57,6 @@ app.get('/', (req, res) => {
     
 })
 
-app.listen(PORT, () => {
-    console.log(`server started on http://localhost:${PORT}`)
+app.listen(Port, () => {
+    console.log(`server started on http://localhost:${Port}`)
 })
