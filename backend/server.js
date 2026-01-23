@@ -12,14 +12,16 @@ import carRouter from './routes/carRoutes.js'
 import bookingRouter from './routes/bookingRoutes.js'
 import paymentRouter from './routes/paymentRouter.js';
 
+dotenv.config(); 
+
 const app = express();
 const Port = process.env.PORT;
-dotenv.config();
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-
+//database
 connectDB();
 
 //MIDLEFRAMWORK
@@ -32,6 +34,7 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
+//statics
 app.use(
     '/uploads',(req, res, next )=>{
         res.setHeader('Access-Control-Allow-Origin', '*')

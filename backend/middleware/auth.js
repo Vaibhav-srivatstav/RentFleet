@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 import User from '../models/userModel.js'
 
-const JWT_SECRET = 'your_jwt_secret_here';
+const jwt = process.env.JWT_SECRET;
 export default async function authMiddleware(req, res, next){
     const authHeader = req.headers.authorization;
 
@@ -14,7 +14,7 @@ export default async function authMiddleware(req, res, next){
     const token = authHeader.split(' ')[1];
 
     try{
-        const payload = jwt.verify(token, JWT_SECRET);
+        const payload = jwt.verify(token, jwt);
         const user = await User.findById(payload.id).select('-password')
 
         if(!user){

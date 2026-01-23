@@ -7,10 +7,10 @@ import jwt from 'jsonwebtoken';
 
 // token function 
 const TOKEN_EXPIRES_IN = '24h';
-const JWT_SECRET = 'your_jwt_secret_here';
+const jwt = process.env.JWT_SECRET;
 
 const createToken = (userId) => {
-    const secret = JWT_SECRET;
+    const secret = jwt;
     if (!secret) throw new Error('JWT_SECRET is not defined on the server');
     return jwt.sign({ id: userId }, secret, { expiresIn: TOKEN_EXPIRES_IN })
 }
@@ -113,7 +113,7 @@ export async function login(req, res) {
             message: "Invalid email or password"
         })
 
-        const token = jwt.sign({ id: user._id }, JWT_SECRET, { expiresIn: '24h' })
+        const token = jwt.sign({ id: user._id }, jwt, { expiresIn: '24h' })
         return res.status(200).json({
             success: true,
             message: 'Login Successfull',
