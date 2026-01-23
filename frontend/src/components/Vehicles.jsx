@@ -29,7 +29,7 @@ const Vehicles = () => {
   const [error, setError] = useState("");
 
   const abortControllerRef = useRef(null);
-  const base = "https://rentfleet-backend.onrender.com/";
+  const base = "https://rentfleet-backend.onrender.com";
   const limit = 12;
   const fallbackImage = `${base}/uploads/default-car.png`;
 

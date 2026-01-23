@@ -40,7 +40,7 @@ const SignUp = () => {
         }
         setLoading(true);
         try {
-            const base = 'https://rentfleet-backend.onrender.com/';
+            const base = 'https://rentfleet-backend.onrender.com';
             const url = `${base}/api/auth/register`
 
             const res = await axios.post(url, formData,{

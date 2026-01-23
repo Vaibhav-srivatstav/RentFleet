@@ -25,7 +25,7 @@ const HomeVehicle = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
   const abortRef = useRef(null);
 
-  const base = "https://rentfleet-backend.onrender.com/";
+  const base = "https://rentfleet-backend.onrender.com";
   const api = axios.create({
     baseURL: base,
     headers: { Accept: "application/json" },

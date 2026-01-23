@@ -3,7 +3,7 @@ import { AddCarPageStyles, toastStyles } from '../assets/dummyStyles';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 
-const baseURL = "https://rentfleet-backend.onrender.com/";
+const baseURL = "https://rentfleet-backend.onrender.com";
 const api = axios.create({ baseURL });
 
 const AddCar = () => {
