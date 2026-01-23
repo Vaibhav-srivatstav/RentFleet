@@ -25,7 +25,12 @@ const __dirname = path.dirname(__filename);
 connectDB();
 
 //MIDLEFRAMWORK
-app.use(cors());
+app.use(cors({
+    origin:[
+        "https://rent-fleet.vercel.app"
+    ],
+    credentials: true
+}));
 app.use(
     helmet({
         crossOriginResourcePolicy:{ policy: 'cross-origin'},
