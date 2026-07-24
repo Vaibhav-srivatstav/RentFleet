@@ -6,7 +6,7 @@ import path from 'path'
 import helmet from 'helmet'
 import { fileURLToPath } from 'url'
 
-import { connectDB } from './config/db.js';
+import connectDB from './config/db.js';
 import userRouter from './routes/userRouters.js';
 import carRouter from './routes/carRoutes.js'
 import bookingRouter from './routes/bookingRoutes.js'
@@ -27,8 +27,8 @@ connectDB();
 //MIDLEFRAMWORK
 app.use(cors({
     origin:[
-        "https://rent-fleet.vercel.app",
-        "https://rentfleet-admin.vercel.app"
+        process.env.FRONTEND_URL,
+        process.env.ADMIN_URL
     ],
     credentials: true
 }));
