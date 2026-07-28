@@ -22,7 +22,7 @@ const __dirname = path.dirname(__filename);
 // CORS
 const allowedOrigins = [
   "https://rent-fleet.vercel.app",
-  "http://localhost:5173",
+  "https://rentfleet-admin.vercel.app",
   process.env.FRONTEND_URL,
   process.env.ADMIN_URL,
 ].filter(Boolean);
