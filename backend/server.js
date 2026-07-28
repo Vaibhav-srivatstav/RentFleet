@@ -1,71 +1,104 @@
-import express from 'express'
-import cors from 'cors'
-import dotenv from 'dotenv'
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import path from "path";
+import helmet from "helmet";
+import { fileURLToPath } from "url";
 
-import path from 'path'
-import helmet from 'helmet'
-import { fileURLToPath } from 'url'
+import connectDB from "./config/db.js";
+import userRouter from "./routes/userRouters.js";
+import carRouter from "./routes/carRoutes.js";
+import bookingRouter from "./routes/bookingRoutes.js";
+import paymentRouter from "./routes/paymentRouter.js";
 
-import connectDB from './config/db.js';
-import userRouter from './routes/userRouters.js';
-import carRouter from './routes/carRoutes.js'
-import bookingRouter from './routes/bookingRoutes.js'
-import paymentRouter from './routes/paymentRouter.js';
-
-dotenv.config(); 
+dotenv.config();
 
 const app = express();
-const Port = process.env.PORT;
-
+const PORT = process.env.PORT || 5000;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-//database
-connectDB();
+// CORS
+const allowedOrigins = [
+  "https://rent-fleet.vercel.app",
+  "http://localhost:5173",
+  process.env.FRONTEND_URL,
+  process.env.ADMIN_URL,
+].filter(Boolean);
 
-//MIDLEFRAMWORK
-app.use(cors({
-    origin:[
-        process.env.FRONTEND_URL,
-        process.env.ADMIN_URL
-    ],
-    credentials: true
-}));
 app.use(
-    helmet({
-        crossOriginResourcePolicy:{ policy: 'cross-origin'},
-    })
-)
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }))
+  cors({
+    origin: (origin, callback) => {
+      // Allow requests without an Origin header, such as Postman
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
 
-//statics
-app.use(
-    '/uploads',(req, res, next )=>{
-        res.setHeader('Access-Control-Allow-Origin', '*')
-        next(); 
+      return callback(
+        new Error(`CORS blocked for origin: ${origin}`)
+      );
     },
-    express.static(path.join(process.cwd() ,'uploads',))
-)
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
-//ROUTES
-app.use('/api/auth', userRouter);
-app.use('/api/vehicle', carRouter);
-app.use('/api/bookings', bookingRouter);
-app.use('/api/payments', paymentRouter);
+// Security middleware
+app.use(
+  helmet({
+    crossOriginResourcePolicy: {
+      policy: "cross-origin",
+    },
+  })
+);
 
-app.get('/api/ping', (req, res) => res.json({
+// Body parsers
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// Static uploads
+app.use(
+  "/uploads",
+  (req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    next();
+  },
+  express.static(path.join(__dirname, "uploads"))
+);
+
+// Routes
+app.use("/api/auth", userRouter);
+app.use("/api/vehicle", carRouter);
+app.use("/api/bookings", bookingRouter);
+app.use("/api/payments", paymentRouter);
+
+// Health check
+app.get("/api/ping", (req, res) => {
+  res.status(200).json({
     ok: true,
-    time: Date.now()
-}))
+    time: Date.now(),
+  });
+});
 
-//LISTEN
-app.get('/', (req, res) => {
-    res.send('API WORKING')
-    
-})
+// Root route
+app.get("/", (req, res) => {
+  res.status(200).send("API WORKING");
+});
 
-app.listen(Port, () => {
-    console.log(`server started on http://localhost:${Port}`)
-})
+// Start server only after MongoDB connects
+const startServer = async () => {
+  try {
+    await connectDB();
+
+    app.listen(PORT, () => {
+      console.log(`Server started on port ${PORT}`);
+    });
+  } catch (error) {
+    console.error("Server startup failed:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();
